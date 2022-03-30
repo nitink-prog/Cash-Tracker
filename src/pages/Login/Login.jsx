@@ -11,7 +11,7 @@ export default function Login() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles["login-form"]}>
+    <form className={styles["login-form"]} onSubmit={handleSubmit}>
       <h2>Your qMoney Account</h2>
       <label>
         <span>Email:</span>
