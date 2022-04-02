@@ -10,7 +10,7 @@ export const useSignup = () => {
     setIsPending(true);
 
     try {
-      // create account
+      // create user account
       const res = await auth.createUserWithEmailAndPassword(email, password);
       console.log(res.user);
 
