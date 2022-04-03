@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSignup } from "../../hooks/useSignup";
 import styles from "./Signup.module.css";
 
@@ -6,12 +6,26 @@ export default function Signup() {
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [isPasswordMatch, setIsPasswordMatch] = useState(false);
   const { signup, isPending, error } = useSignup();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    signup(displayName, email, password);
+    if (isPasswordMatch) {
+      signup(displayName, email, password);
+    }
   };
+
+  useEffect(() => {
+    password === passwordConfirm
+      ? setIsPasswordMatch(true)
+      : setIsPasswordMatch(false);
+
+    return () => {
+      setIsPasswordMatch(false);
+    };
+  }, [password, passwordConfirm]);
 
   return (
     <form className={styles["signup-form"]} onSubmit={handleSubmit}>
@@ -40,6 +54,14 @@ export default function Signup() {
           value={password}
         />
       </label>
+      <label>
+        <span>Confirm Password:</span>
+        <input
+          type="password"
+          onChange={(e) => setPasswordConfirm(e.target.value)}
+          value={passwordConfirm}
+        />
+      </label>
       {isPending ? (
         <button className="btn" disabled>
           Loading...
@@ -47,6 +69,7 @@ export default function Signup() {
       ) : (
         <button className="btn">Sign up</button>
       )}
+      {!isPasswordMatch && <p>Please ensure passwords match</p>}
       {error && <p>{error}</p>}
     </form>
   );
