@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { auth } from "../firebase/config";
 import { useAuthContext } from "./useAuthContext";
 
 export const useSignup = () => {
+  const [isCancelled, setIsCancelled] = useState(false);
   const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
   const { dispatch } = useAuthContext();
@@ -23,14 +24,26 @@ export const useSignup = () => {
       // dispatch LOGIN to AuthContext
       dispatch({ type: "LOGIN", payload: res.user });
 
-      setIsPending(false);
-      setError(null);
+      if (!isCancelled) {
+        setIsPending(false);
+        setError(null);
+      }
     } catch (err) {
-      console.log(err.message);
-      setError(err.message);
-      setIsPending(false);
+      if (!isCancelled) {
+        console.log(err.message);
+        setError(err.message);
+        setIsPending(false);
+      }
     }
   };
+
+  // clean-up function in case component unmounts during async functions
+  // setting IsCancelled to true will cause all state changes above to be terminated safely
+  useEffect(() => {
+    return () => {
+      setIsCancelled(true);
+    };
+  }, []);
 
   return { error, isPending, signup };
 };
