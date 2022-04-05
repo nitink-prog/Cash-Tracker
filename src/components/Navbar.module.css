@@ -1,6 +1,6 @@
 .navbar {
   width: 100%;
-  background: whitesmoke;
+  background: rgb(224, 246, 245);
   padding: 20px 10px;
   box-sizing: border-box;
 }
@@ -25,4 +25,7 @@
 .navbar a {
   color: #333;
   text-decoration: none;
+}
+.navbar li {
+  padding-right: 10px;
 }
