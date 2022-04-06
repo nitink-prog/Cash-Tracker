@@ -10,8 +10,8 @@ let initialState = {
 
 const firestoreReducer = (state, action) => {
   switch (action.type) {
-    case "":
-    // TODO
+    case "IS_PENDING":
+      return { ...state, isPending: true };
     default:
       return state;
   }
@@ -24,11 +24,15 @@ export const useFirestore = (collection) => {
   // collection ref
   const ref = db.collection(collection);
 
-  const addDocument = (doc) => {
-    // TODO
+  const addDocument = async (doc) => {
+    dispatch({ type: "IS_PENDING" });
+    try {
+        const addedDoc = await ref.add(doc)
+        
+    } catch (err) {}
   };
 
-  const deleteDocument = (id) => {
+  const deleteDocument = async (id) => {
     // TODO
   };
 
@@ -37,5 +41,5 @@ export const useFirestore = (collection) => {
     return () => setIsCancelled(true);
   }, []);
 
-  return {addDocument, deleteDocument, response}
+  return { addDocument, deleteDocument, response };
 };
