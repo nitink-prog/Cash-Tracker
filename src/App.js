@@ -14,14 +14,19 @@ function App() {
         <BrowserRouter>
           <Navbar />
           <Switch>
+            {/* if logged in, render <Home />, else send to login */}
             <Route exact path="/">
-              <Home />
+              {user ? <Home /> : <Redirect to="/login" />}
             </Route>
+
+            {/* if logged in, send home, else render <Login /> */}
             <Route path="/login">
-              <Login />
+              {user ? <Redirect to="/" /> : <Login />}
             </Route>
+
+            {/* if logged in, send home, else render <Signup /> */}
             <Route path="/signup">
-              <Signup />
+              {user ? <Redirect to="/" /> : <Signup />}
             </Route>
           </Switch>
         </BrowserRouter>
