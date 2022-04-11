@@ -1,19 +1,23 @@
 import { useEffect, useRef, useState } from "react";
 import { db } from "../firebase/config";
 
-export const useCollection = (collection, _query) => {
+export const useCollection = (collection, _query, _orderBy) => {
   const [documents, setDocuments] = useState(null);
   const [error, setError] = useState(null);
 
-  // _query is brought in as an array, which is a reference-type
-  // useRef will prevent infinite loop when having it in the deps of useEffect
+  // these args are brought in as arrays, which are reference-type
+  // useRef will prevent infinite loop when having them in useEffect deps
   const query = useRef(_query).current;
+  const orderBy = useRef(_orderBy).current;
 
   useEffect(() => {
     let ref = db.collection(collection);
 
     if (query) {
       ref = ref.where(...query);
+    }
+    if (orderBy) {
+      ref = ref.orderBy(...orderBy);
     }
 
     const unSubscribe = ref.onSnapshot(
@@ -35,7 +39,7 @@ export const useCollection = (collection, _query) => {
 
     // Clean-up for unmount
     return () => unSubscribe();
-  }, [collection, query]);
+  }, [collection, query, orderBy]);
 
   return { documents, error };
 };
