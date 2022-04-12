@@ -1,70 +1,44 @@
-# Getting Started with Create React App
+# qMoney Tracker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+qMoney Tracker is a React app that allows users to add their transactions to help track their expenses. Built to study many React paradigms, with a focus on **authentication** through Firebase.
 
-## Available Scripts
+## Studies
 
-In the project directory, you can run:
+### React Hooks
+- useState
+- useEffect
+- useRef
 
-### `npm start`
+### Custom Hooks
+- useAuthContext
+	- Provides the current state of authentication (stored in React Context) to many different components in the web app.
+- useCollection
+	- General purpose hook that pulls all data from a given collection, with querying and sorting built in.
+- useFirestore
+	- Uses React Reducer for storing the state of a document being updated (added, deleted, pending loading, error loading).
+- useLogin
+- useLogout
+- useSignup
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### React Router
+- BrowserRouter, Switch, Route, Redirect
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Firestore Database
+- Connection to cloud backend database.
+- Real-time data and error handling.
+	- Changes to transactions are reflected instantly.
 
-### `npm test`
+### Authentication
+- Users can sign up with email and password.
+	- Users are stored in Firebase Authentication.
+- Data is only shown to users that are authenticated.
+- Different users have their own data.
+- Data is safe by implementing Firestore Rules.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Upcoming Features
+- Allow users to add the date the transaction was made.
+	- Sort by -> Date added, Date of transaction.
+- Show total expenditure by adding up all transactions.
+- Allow users to select a range of time to display transactions from.
+	- Show the total of that time range.
+- Account settings.
